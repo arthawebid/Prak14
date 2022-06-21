@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quis 2</title>
+    <link rel="stylesheet" type="text/css" href="framework/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <div class="container">
+    <h3>Konversi Suhu</h3>
+        <div>
+            <label for="nCelius">Celsius</label>
+            <div>
+                <input type="text" id="nCelius">
+            </div>
+        </div>
+        <div>
+            <label for="nFahrenheit">Fahrenheit</label>
+            <div>
+                <input type="text" id="nFahrenheit">
+            </div>
+        </div>
+        <div>
+            <label for="nKelvin">Kelvin</label>
+            <div>
+                <input type="text" id="nKelvin">
+            </div>
+        </div>
+    </div>
+
+
+	
+</body>
+
+<script src="framework/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="framework/jquery/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+        nc=0;
+        nf=0;
+        nk=0;
+        $("#nCelius").change(function(){
+            nc= $("#nCelius").val();
+            nf=9/5*parseFloat(nc)+32;
+            nk=parseFloat(nc)+273.15;
+            $("#nFahrenheit").val(nf);
+            $("#nKelvin").val(nk);
+        });
+        $("#nFahrenheit").change(function(){
+            nf= $("#nFahrenheit").val();
+            nc=(parseFloat(nf)-32)*5/9;
+            nk=(parseFloat(nf)-32)*5/9+273.15;
+            $("#nCelius").val(nc);
+            $("#nKelvin").val(nk);
+        });
+        $("#nKelvin").change(function(){
+            nk= $("#nKelvin").val();
+            nf= (nk-273.15)*9/5+32;
+            nc=parseFloat(nk)-273.15;
+            $("#nFahrenheit").val(nf);
+            $("#nCelius").val(nc);
+        });
+	});
+</script>
+</html>

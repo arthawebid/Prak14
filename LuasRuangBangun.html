@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Belajar pengenalan jquery dasar</title>
+    <link rel="stylesheet" type="text/css" href="framework/bootstrap/css/bootstrap.min.css">
+    <style>
+        #persegi,#segi3{display: none;}
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+    <h3>Hitung Luas</h3>
+    <select id="pilih" class="form-select" aria-label="Default select example">
+        <option selected>Pilih Bagun Ruang</option>
+        <option value="persegi">Persegi / Persegipanjang</option>
+        <option value="segi3">Segitiga</option>
+      </select>
+    </div>
+
+    <div id="persegi">
+        <div class="container">
+            <h3>Luas Persegi/Persegi Panjang</h3>
+            <div>
+                <label for="pj">Panjangan</label>
+                <div><input type="text" id="txPJ"></div>
+            </div>
+            <div>
+                <label for="lb">Lebar</label>
+                <div><input type="text" id="txLB"></div>
+            </div>
+            <div>
+                <label for="Luas">Luasnya</label>
+                <div><input type="text" id="txLUASPP" disabled></div>
+            </div>
+            <div>
+                <div><button id="hPersegi" class="btn btn-primary">Hitung</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="segi3">
+        <div class="container">
+            <h3>Luas Segitiga</h3>
+            <div>
+                <label for="Alas">Alas</label>
+                <div><input type="text" id="txAlAS"></div>
+            </div>
+            <div>
+                <label for="Tg">Tinggi</label>
+                <div><input type="text" id="txTG"></div>
+            </div>
+            <div>
+                <label for="pj">Luasnya</label>
+                <div><input type="text" id="txLUASP3" disabled></div>
+            </div>
+            <div>
+                <div><button id="hSegi3" class="btn btn-primary">Hitung</button></div>
+            </div>
+        </div>
+    </div>
+	
+</body>
+
+<script src="framework/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="framework/jquery/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("#pilih").change(function(){
+            var pl = $("#pilih").val();
+            if(pl=="persegi"){
+                $("#persegi").show();
+                $("#segi3").hide();
+            }else if(pl=="segi3"){
+                $("#persegi").hide();
+                $("#segi3").show();
+            }else{
+                $("#persegi").hide();
+                $("#segi3").hide();
+            }
+        });
+        $("#hPersegi").click(function(){
+            var pj = $("#txPJ").val();
+            var lb = $("#txLB").val();
+            var LU = pj*lb;
+            $("#txLUASPP").val(LU);
+        });
+        $("#hSegi3").click(function(){
+            var al = $("#txAlAS").val();
+            var tg = $("#txTG").val();
+            var LU = al*tg/2;
+            $("#txLUASP3").val(LU);
+        });
+        
+	});
+</script>
+</html>

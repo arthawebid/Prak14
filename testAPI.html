@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Efek Visual</title>
+<link rel="stylesheet" href="framework/bootstrap/css/bootstrap.min.css">   
+<style type="text/css">
+    .tombol{padding-top: 10px;}
+    h3{font-size: 18px;}
+    .cardpane{min-height: 215px;}
+    .identitas{min-height: 80px;}
+    #VtxNIM{margin-left: 25px;}
+    #VtxNAMA{margin-left: 14px;}
+    #cand, #cand2{padding:10px;}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <label; for="NIM">NIM:</label>
+                <input type="text" id="txNIM" class="form-control">
+                <label; for="IDMK">IDMK:</label>
+                <input type="text" id="txIDMK" class="form-control">
+                <label; for="KLS">KELAS:</label>
+                <input type="text" id="txKLS" class="form-control">
+                <div class="form-group tombol">
+                    <button id="cmdcari" class="btn btn-primary">Cari Data</button>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="identitas">
+                    <h3>Data Nilai</h3>
+                    <div id="lbNIM">NIM<span id="VtxNIM">:</span></div>
+                    <div id="lbNAMA">Nama<span id="VtxNAMA">:</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card cardpane">
+                            <div class="card-content">
+                                <div id="cand"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card cardpane">
+                            <div class="card-content">
+                                <div id="cand2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="framework/jquery/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#cmdcari").click(function(){
+            $('#cand').hide(100);
+            $('#cand2').hide(100);
+            $('#VtxNIM').hide(100);
+            $('#VtxNAMA').hide(100);
+            var prm = "getpress-"+$("#txIDMK").val()+"-"+$("#txNIM").val()+"-"+$("#txKLS").val()+".html";
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost/'+prm,
+                dataType: 'json',
+                success: function (data) {
+                    var vnim = ": "+data["NIM"];
+                    var vnama = ": "+data["NAMA"];
+                    $('#VtxNIM').html(vnim);
+                    $('#VtxNAMA').html(vnama);
+                    $('#VtxNIM').show(100);
+                    $('#VtxNAMA').show(100);
+
+                    var jmlpertemuan = 16;
+                    var thadir=parseInt(data["MANGKIR"]);
+                    var hdr = jmlpertemuan - thadir;
+                    var datax = "<h3>Data Nilai "+data["NAMA"]+" ("+data["NIM"]+")</h3><ul><li>Nilai Akhir: "+data["N_NA"]+"("+data["GRADE"]+")</li><li>Keaktifan:"+data["N_AKTIF"]+"</li><li>Tugas:"+data["N_TUGAS"]+"</li><li>Quis:"+data["N_QUIS"]+"</li><li>UTS:"+data["N_UTS"]+"</li><li>UAS:"+data["N_UAS"]+"</li></ul>";
+                    var data2 = "<h3>Presensi<h3>Jumlah Kehadiran: "+ hdr + " ( "+data["PROS_HADIR"]+" % )";
+                    $('#cand').html(datax);
+                    $('#cand').show(100);
+                    $('#cand2').html(data2);
+                    $('#cand2').show(100);
+                }
+            });
+        });
+    });
+</script>
+</html>

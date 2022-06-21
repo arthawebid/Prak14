@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="framework/bootstrap/css/bootstrap.min.css">
+    <style type="text/css">
+        .kotak{height:100px;margin: 8px;}
+        .tmb{padding-bottom:20px;}
+    </style>
+</head>
+<body>
+
+    <div class="container tmb">
+        <h3>Belajar jQuery show hide dan Bootstraps</h3>
+        <button class="btn btn-primary" id="TPilih1">Pilih 1</button>
+        <button class="btn btn-primary" id="TPilih2">Pilih 2</button>
+        <select id="SPilih">
+            <option selected="selected">Pilih Menu</option>
+            <option value="A">Pilih 1</option>
+            <option value="B">Pilih 2</option>
+        </select>
+
+    </div>    
+    
+    <div class="container">
+    <div id="Pilih1">
+        <div class="card">
+            <div class="card-content kotak">
+                Isi Pilihan 1
+            </div>
+        </div>
+    </div>
+
+    <div id="Pilih2">
+        <div class="card">
+            <div class="card-content kotak">
+                Isi Pilihan 2
+            </div>
+        </div>
+    </div>
+
+    </div>
+    
+</body>
+<script src="framework/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="framework/jquery/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#Pilih1").hide();
+        $("#Pilih2").hide();
+
+        $("#TPilih1").click(function(){
+            $("#Pilih1").show(1000);
+            $("#Pilih2").hide(500);
+        });
+        $("#TPilih2").click(function(){
+            $("#Pilih2").show(1000);
+            $("#Pilih1").hide(500);
+        });
+
+        $("#SPilih").change(function(){
+            var npilih = $("#SPilih").val();
+            switch(npilih){
+                case "A":
+                    $("#Pilih2").hide(500);
+                    $("#Pilih1").show(1000);
+                    break;
+                case "B":
+                    $("#Pilih1").hide(500);
+                    $("#Pilih2").show(1000);
+                    break;
+                default:
+                    $("#Pilih1").hide(500);
+                    $("#Pilih2").hide(500);
+                    break;
+            }
+        });
+    });
+</script>
+
+</html>
